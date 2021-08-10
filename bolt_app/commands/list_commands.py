@@ -1,3 +1,5 @@
+import subprocess
+
 # List of commands
 def init_commands(app):
     @app.command("/help")
@@ -37,22 +39,22 @@ def init_commands(app):
                         "text": "- */rollback* [application]: Comando para dar marcha atrás tras un deploy en PROD"
                     }
                 },
+                {
+                    "type": "divider",
+                },
             ],
-            text=f"Hola <@{command['user_name']}>!"
+            text=f"Help by <@{command['user_name']}>!"
         )
-
-
-    @app.command("/echo")
-    def echo_command(ack, say, command):
-        # Acknowledge command request
-        ack()
-        say(f"{command['text']}")
 
 
     @app.command("/rollback")
     def rollback_command(ack, say, command):
         # Acknowledge command request
         ack()
+
+        script_output = subprocess.call(["echo", f"{command['text']}"])
+        print(script_output)
+
         say(
             blocks=[
                 {
@@ -65,6 +67,9 @@ def init_commands(app):
                         "text": f"{command['text']}"
                     },
                 },
+                {
+                    "type": "divider",
+                },
             ],
-            text=f"Rollback <@{command['text']}>!"
+            text=f"Rollback by <@{command['user_name']}>!"
         )
