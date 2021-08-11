@@ -29,13 +29,6 @@ def init_commands(app):
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": "- */echo* [text]: Comando que responde con lo que hayas escrito"
-                    }
-                },
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
                         "text": "- */rollback* [application]: Comando para dar marcha atrás tras un deploy en PROD"
                     }
                 },
