@@ -40,17 +40,12 @@ def init_commands(app):
         )
 
 
-    @app.command("/pullAll")
+    @app.command("/pullall")
     def pullall_command(ack, say, command):
         # Acknowledge command request
         ack()
 
-        script_output = subprocess.call([
-            "ansible-playbook",
-            "-t",
-            "pullall",
-            "r2d2.yml"
-        ])
+        script_output = subprocess.call(["/usr/local/bin/ansible_bot", "-t", "pullall", "r2d2.yml"])
         print(script_output)
 
         say(
@@ -62,7 +57,7 @@ def init_commands(app):
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": f"Salida del comando: {script_output}"
+                        "text": f"Comando ejecutado con éxito!"
                     },
                 },
                 {
