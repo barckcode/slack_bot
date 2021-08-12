@@ -29,7 +29,7 @@ def init_commands(app):
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": "- */rollback* [application]: Comando para dar marcha atrás tras un deploy en PROD"
+                        "text": "- */pullAll*: Comando para hacer pull de todas las aplicaciones que hay en sauron"
                     }
                 },
                 {
@@ -40,12 +40,17 @@ def init_commands(app):
         )
 
 
-    @app.command("/rollback")
-    def rollback_command(ack, say, command):
+    @app.command("/pullAll")
+    def pullall_command(ack, say, command):
         # Acknowledge command request
         ack()
 
-        script_output = subprocess.call(["echo", f"{command['text']}"])
+        script_output = subprocess.call([
+            "ansible-playbook",
+            "-t",
+            "pullall",
+            "r2d2.yml"
+        ])
         print(script_output)
 
         say(
@@ -57,12 +62,12 @@ def init_commands(app):
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": f"{command['text']}"
+                        "text": f"Salida del comando: {script_output}"
                     },
                 },
                 {
                     "type": "divider",
                 },
             ],
-            text=f"Rollback by <@{command['user_name']}>!"
+            text=f"PullAll by <@{command['user_name']}>!"
         )
