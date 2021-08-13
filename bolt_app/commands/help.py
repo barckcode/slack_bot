@@ -1,9 +1,6 @@
-import subprocess
-
-# List of commands
-def init_commands(app):
+def help_command(app):
     @app.command("/help")
-    def help_command(ack, say, command):
+    def help(ack, say, command):
         # Acknowledge command request
         ack()
         say(
@@ -37,32 +34,4 @@ def init_commands(app):
                 },
             ],
             text=f"Help by <@{command['user_name']}>!"
-        )
-
-
-    @app.command("/pullall")
-    def pullall_command(ack, say, command):
-        # Acknowledge command request
-        ack()
-
-        script_output = subprocess.call(["/usr/local/bin/ansible_bot", "-t", "pullall", "r2d2.yml"])
-        print(script_output)
-
-        say(
-            blocks=[
-                {
-                    "type": "divider",
-                },
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": f"Comando ejecutado con éxito!"
-                    },
-                },
-                {
-                    "type": "divider",
-                },
-            ],
-            text=f"PullAll by <@{command['user_name']}>!"
         )
