@@ -5,6 +5,7 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 # Internal modules
 from commands.help import help_command
 from commands.pullall import pullall_command
+from commands.download_file import dowload_file_command
 
 
 # Init Bolt
@@ -15,6 +16,7 @@ app = App(
 # Commands List
 help_command(app)
 pullall_command(app)
+dowload_file_command(app)
 
 
 # Start App

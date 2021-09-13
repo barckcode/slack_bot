@@ -30,6 +30,13 @@ def help_command(app):
                     }
                 },
                 {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "- */download_file*: Comando para obtener una URL de descarga de un fichero en S3"
+                    }
+                },
+                {
                     "type": "divider",
                 },
             ],
