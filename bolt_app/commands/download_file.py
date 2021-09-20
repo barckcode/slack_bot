@@ -16,7 +16,9 @@ def dowload_file_command(app):
             "600" # 10min
         ], capture_output=True)
 
-        print(script_output.stdout)
+        output = str(script_output.stdout).replace('\\n', ' ')
+
+        print(output)
 
         say(
             blocks=[
@@ -27,7 +29,7 @@ def dowload_file_command(app):
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": f"@{command['user_name']} Para descargar el fichero de click en este link: {script_output.stdout}"
+                        "text": f"@{command['user_name']} Para descargar el fichero de click en este link: {output}"
                     },
                 },
                 {
