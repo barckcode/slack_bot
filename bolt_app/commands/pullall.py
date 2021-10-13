@@ -7,8 +7,33 @@ def pullall_command(app):
         # Acknowledge command request
         ack()
 
-        script_output = subprocess.call(["/usr/local/bin/ansible_bot", "-t", "pullall", "r2d2.yml"])
+        #
+        # TEST ANSIBLE EXEC
+        ###
+        # script_output = subprocess.call([
+        #     "/usr/local/bin/ansible_bot",
+        #     "-t",
+        #     "pullall",
+        #     "r2d2.yml"
+        # ])
+        # print(script_output)
+
+
+        #
+        # TEST TAKE PARAMETERS FROM SLACK TEXT
+        ###
+        ALL_PARAMETERS=f"{command['text']}"
+        FIRST_PARAMETER=f"{ALL_PARAMETERS.split()[0]}"
+        SECOND_PARAMETER=f"{ALL_PARAMETERS.split()[1]}"
+
+        script_output = subprocess.call([
+            "echo",
+            f"{FIRST_PARAMETER}",
+            f"{SECOND_PARAMETER}",
+        ])
         print(script_output)
+        print(FIRST_PARAMETER)
+        print(SECOND_PARAMETER)
 
         if script_output == 0:
             say(
